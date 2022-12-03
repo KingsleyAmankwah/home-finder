@@ -5,7 +5,7 @@ import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg";
 
 function Explore() {
   return (
-    <div className="font-[system-ui] m-[1rem] sm:m-[2rem]">
+    <div className="font-[system-ui] m-[1rem] sm:m-[2rem] h-full">
       <header>
         <p className="text-3xl lg:text-5xl font-bold">Explore</p>
       </header>
@@ -13,8 +13,8 @@ function Explore() {
       <main>
         <Slider />
 
-        <p className="mt-[3rem] font-bold">Categories</p>
-        <div className="md:mt-[1rem] mt-[0.8rem] sm:flex justify-between">
+        <p className="mt-[2rem] font-bold">Categories</p>
+        <div className="md:mt-[1rem] my-[0.8rem] sm:flex justify-between ">
           <a href="/category/rent" className="w-[48%]">
             <img
               src={rentCategoryImage}
