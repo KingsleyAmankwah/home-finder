@@ -1,14 +1,15 @@
-import resetPasword from "../assets/jpg/reset-password.jpg";
+// import resetPasword from "../assets/jpg/reset-password.jpg";
+import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg";
 
 function ForgotPassword() {
   return (
     <>
-      <div className="container mx-auto">
+      <div className="container my-[5rem] mx-auto">
         <div className="flex justify-center items-center h-full px-6">
           <div className="w-full xl:w-3/4 lg:w-11/12 flex">
             <img
-              className="w-full h-full bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
-              src={resetPasword}
+              className="w-full h-full object-cover bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
+              src={sellCategoryImage}
               alt="banner"
             />
 
