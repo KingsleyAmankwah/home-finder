@@ -8,23 +8,23 @@ import bathtubIcon from "../assets/svg/bathtubIcon.svg";
 
 function ListingItem() {
   return (
-    <li className="categoryListing flex justify-between items-center mb-[1rem] relative">
-      <Link to={`/category/`} className="categoryListingLink contents">
+    <li className="categoryListing sm:flex justify-between items-center mb-[1rem] relative">
+      <Link to={`/category/`} className="contents">
         <img
           src={sellCategoryImage}
           alt="img"
-          className="w-[30%] h-[217px] object-cover rounded-2xl"
+          className="sm:w-[30%] sm:h-[217px] w-full object-cover rounded-2xl"
         />
-        <div className="categoryListingDetails w-[65%]">
+        <div className="w-full sm:w-[65%] mt-[1rem]">
           <p className="font-[600] opacity-[50] text-[0.7rem]">
             Abuakwa Tanoso
           </p>
-          <p className="categoryListingName font-bold text-2xl">Best Suite </p>
-          <p className="flex items-center font-bold text-lg my-[0.5rem] text-[#00cc66]">
-            $145
+          <p className="font-bold text-2xl">Best Suite Hostel</p>
+          <p className="flex items-center font-bold text-3xl my-[0.5rem] text-[#00cc66]">
+            Ghs 1505.00
           </p>
 
-          <div className="categoryListingInfoDiv flex justify-between max-w-[275px]">
+          <div className="flex justify-between w-full sm:max-w-[275px]">
             <img src={bedIcon} alt="bed" />
             <p className="font-light text-sm"> 5 bedrooms</p>
             <img src={bathtubIcon} alt="bath" />
