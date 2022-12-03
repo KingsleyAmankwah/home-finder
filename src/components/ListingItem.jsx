@@ -9,22 +9,26 @@ import bathtubIcon from "../assets/svg/bathtubIcon.svg";
 function ListingItem() {
   return (
     <li className="categoryListing flex justify-between items-center mb-[1rem] relative">
-      <Link to={`/category/`} className="categoryListingLink">
+      <Link to={`/category/`} className="categoryListingLink contents">
         <img
           src={sellCategoryImage}
           alt="img"
-          className="w-[30%] h-[100px] object-cover rounded-2xl"
+          className="w-[30%] h-[217px] object-cover rounded-2xl"
         />
-        <div className="categoryListingDetails">
-          <p className="categoryListingLocation"></p>
-          <p className="categoryListingName"></p>
-          <p className="categoryListingPrice">$</p>
+        <div className="categoryListingDetails w-[65%]">
+          <p className="font-[600] opacity-[50] text-[0.7rem]">
+            Abuakwa Tanoso
+          </p>
+          <p className="categoryListingName font-bold text-2xl">Best Suite </p>
+          <p className="flex items-center font-bold text-lg my-[0.5rem] text-[#00cc66]">
+            $145
+          </p>
 
-          <div className="categoryListingInfoDiv">
+          <div className="categoryListingInfoDiv flex justify-between max-w-[275px]">
             <img src={bedIcon} alt="bed" />
-            <p className="categoryListingInfoText"></p>
+            <p className="font-light text-sm"> 5 bedrooms</p>
             <img src={bathtubIcon} alt="bath" />
-            <p className="categoryListingInfoText"></p>
+            <p className="font-light text-sm"> 8 bathubs</p>
           </div>
         </div>
       </Link>
