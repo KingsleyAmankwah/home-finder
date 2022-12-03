@@ -55,18 +55,18 @@ function SignIn() {
 
                         <div className="flex items-center justify-between pb-6">
                           <p
-                            className="mb-0 text-gray-500 text-sm cursor-pointer"
+                            className="text-sm text-black-500 align-baseline hover:text-blue-800 text-sm cursor-pointer"
                             onClick={() => navigate("/sign-up")}
                           >
-                            Don't have an account?
+                            Create an Account
                           </p>
 
-                          <a
-                            className="text-gray-500 text-sm text-right"
-                            href="#!"
+                          <p
+                            className="text-sm text-black-500 align-baseline hover:text-blue-800 text-right cursor-pointer"
+                            onClick={() => navigate("/forgot-password")}
                           >
                             Forgot password?
-                          </a>
+                          </p>
                         </div>
 
                         <div className="flex items-center my-2 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
