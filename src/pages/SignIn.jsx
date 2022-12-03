@@ -1,11 +1,13 @@
 import google from "../assets/jpg/google.png";
 import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg";
-
+import { useNavigate } from "react-router-dom";
 function SignIn() {
+  const navigate = useNavigate();
+
   return (
     <>
       <section className="h-full bg-gray-200 md:h-screen">
-        <div className="container py-12 px-6 h-full">
+        <div className="container md:py-12 md:px-6 h-full">
           <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
             <div className="xl:w-10/12">
               <div className="w-full bg-white shadow-lg rounded-lg">
@@ -17,9 +19,8 @@ function SignIn() {
                           className="mx-auto w-40"
                           src="../assets/memories-ii.png"
                           alt="logo"
-                          srcSet=""
                         />
-                        <h4 className="text-xl font-semibold mt-1 mb-5 pb-1">
+                        <h4 className="text-xl font-semibold my-5 pb-1">
                           Welcome back!
                         </h4>
                       </div>
@@ -45,13 +46,25 @@ function SignIn() {
                         </div>
                         <div className="text-center pt-1 mb-5 pb-1">
                           <button
-                            className="inline-block px-6 py-2.5 text-black font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+                            className="inline-block px-6 py-2.5 text-black font-medium text-xs leading-tight rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
                             type="submit"
                           >
                             Log in
                           </button>
+                        </div>
 
-                          <a class="text-gray-500 text-right" href="#!">
+                        <div className="flex items-center justify-between pb-6">
+                          <p
+                            className="mb-0 text-gray-500 text-sm cursor-pointer"
+                            onClick={() => navigate("/sign-up")}
+                          >
+                            Don't have an account?
+                          </p>
+
+                          <a
+                            className="text-gray-500 text-sm text-right"
+                            href="#!"
+                          >
                             Forgot password?
                           </a>
                         </div>
@@ -69,33 +82,17 @@ function SignIn() {
                             src={google}
                             alt="Logo"
                             className="w-8 h-8"
-                            srcset=""
+                            srcSet=""
                           />{" "}
                           Continue with Google
                         </a>
-                        <div className="flex items-center justify-between pb-6">
-                          <p className="mb-0 mr-2">Don't have an account?</p>
-                          <a
-                            href="/sign-up"
-                            className="inline-block px-6 py-2 text-black font-medium text-xs leading-tight rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                          >
-                            Sign Up
-                          </a>
-                        </div>
                       </form>
-
-                      <div className="text-center">
-                        <a href="/" className="">
-                          Back Home
-                        </a>
-                      </div>
                     </div>
                   </div>
                   <div className="lg:w-6/12  md:flex">
                     <img
                       src={sellCategoryImage}
                       alt="Banner"
-                      srcset=""
                       className="object-cover w-full h-full"
                     />
                   </div>
