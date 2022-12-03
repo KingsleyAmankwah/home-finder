@@ -74,18 +74,18 @@ function Register() {
                         </div>
                         <div className="flex items-center justify-between pb-6">
                           <p
-                            className="mb-0 cursor-pointer text-gray-500"
+                            className="mb-0 cursor-pointer text-sm text-black-500 align-baseline hover:text-blue-800"
                             onClick={() => navigate("/sign-in")}
                           >
-                            Already have an account?
+                            Already have an account? Login!
                           </p>
 
-                          <a
-                            className="text-gray-500 text-sm text-right"
-                            href="#!"
+                          <p
+                            className="text-sm text-black-500 align-baseline hover:text-blue-800 text-right cursor-pointer"
+                            onClick={() => navigate("/forgot-password")}
                           >
                             Forgot password?
-                          </a>
+                          </p>
                         </div>
                       </form>
                     </div>
