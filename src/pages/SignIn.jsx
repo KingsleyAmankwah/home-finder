@@ -1,6 +1,6 @@
-import google from "../assets/jpg/google.png";
 import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg";
 import { useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 function SignIn() {
   const navigate = useNavigate();
 
@@ -74,22 +74,11 @@ function SignIn() {
                             OR
                           </p>
                         </div>
-                        <a
-                          className=" my-5 px-7 py-3 text-black font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center"
-                          href="#!"
-                        >
-                          <img
-                            src={google}
-                            alt="Logo"
-                            className="w-8 h-8"
-                            srcSet=""
-                          />{" "}
-                          Continue with Google
-                        </a>
+                        <OAuth/>
                       </form>
                     </div>
                   </div>
-                  <div className="lg:w-6/12  md:flex">
+                  <div className="lg:w-6/12 md:flex">
                     <img
                       src={sellCategoryImage}
                       alt="Banner"
