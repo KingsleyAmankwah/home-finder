@@ -3,7 +3,7 @@
 function Slider() {
   return (
     <>
-      <p className="font-[700] mt-[1rem]">Recommended</p>
+      <p className="font-[500] mt-[1rem]">Recommended</p>
 
       <div className="relative rounded-3xl w-full h-[50vh] after:content-[''] after:absolute after:bg-[#000] after:top-0 after:left-0 after:h-[50vh] after:w-full after:opacity-50 after:rounded-3xl bg-center bg-cover bg-no-repeat bg-[url('./images/sellCategoryImage.jpg')]">
         {/* <div className="Banner_contents">
