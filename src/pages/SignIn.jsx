@@ -1,8 +1,46 @@
 import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg";
 import { useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from "react-toastify";
+
 function SignIn() {
   const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = formData;
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (userCredentials.user) {
+        navigate("/");
+        toast.success(`Logged In as ${userCredentials.name}`);
+      }
+    } catch (error) {
+      toast.error("Invalid credentials");
+    }
+  };
 
   return (
     <>
@@ -24,7 +62,7 @@ function SignIn() {
                           Welcome back!
                         </h4>
                       </div>
-                      <form>
+                      <form onSubmit={onSubmit}>
                         <p className="my-4">Please login to your account</p>
                         <div className="mb-4">
                           <input
@@ -32,6 +70,8 @@ function SignIn() {
                             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             name="email"
                             placeholder="Email"
+                            value={email}
+                            onChange={onChange}
                             required
                           />
                         </div>
@@ -41,6 +81,8 @@ function SignIn() {
                             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             name="password"
                             placeholder="Password"
+                            value={password}
+                            onChange={onChange}
                             required
                           />
                         </div>
@@ -55,7 +97,7 @@ function SignIn() {
 
                         <div className="flex items-center justify-between pb-6">
                           <p
-                            className="text-sm text-black-500 align-baseline hover:text-blue-800 text-sm cursor-pointer"
+                            className="text-sm text-black-500 align-baseline hover:text-blue-800  cursor-pointer"
                             onClick={() => navigate("/sign-up")}
                           >
                             Create an Account
@@ -74,7 +116,7 @@ function SignIn() {
                             OR
                           </p>
                         </div>
-                        <OAuth/>
+                        <OAuth />
                       </form>
                     </div>
                   </div>
