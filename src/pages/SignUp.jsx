@@ -1,8 +1,64 @@
 import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { toast } from "react-toastify";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase.config";
 
 function Register() {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
+
+  const { name, email, password, password2 } = formData;
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+
+      if (password !== password2) {
+        toast.error("The two passwords do not match!");
+      }
+
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredentials.user;
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      });
+
+      const formDataCopy = { ...formData };
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
+      navigate("/");
+    } catch (error) {
+      toast.error("Sorry something went wrong");
+    }
+  };
 
   return (
     <>
@@ -21,7 +77,7 @@ function Register() {
                           alt="logo"
                         />
                       </div>
-                      <form>
+                      <form onSubmit={onSubmit}>
                         <p className="my-4 text-center">
                           Create an account to discover or launch homes for sale
                           or rent
@@ -32,6 +88,8 @@ function Register() {
                             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             placeholder="Full Name"
                             name="name"
+                            value={name}
+                            onChange={onChange}
                             required
                           />
                         </div>
@@ -41,6 +99,8 @@ function Register() {
                             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             placeholder="Email"
                             name="email"
+                            value={email}
+                            onChange={onChange}
                             required
                           />
                         </div>
@@ -50,6 +110,8 @@ function Register() {
                             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             placeholder="Password"
                             name="password"
+                            value={password}
+                            onChange={onChange}
                             required
                           />
                         </div>
@@ -60,6 +122,8 @@ function Register() {
                             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             placeholder="Confirm Password"
                             name="password2"
+                            value={password2}
+                            onChange={onChange}
                             required
                           />
                         </div>
