@@ -88,23 +88,23 @@ function SignIn() {
                         </div>
                         <div className="text-center pt-1 mb-5 pb-1">
                           <button
-                            className="inline-block px-6 py-2.5 text-black font-medium text-xs leading-tight rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+                            className="bg-green-500  hover:bg-green-700 inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight rounded-xl shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
                             type="submit"
                           >
-                            Log in
+                            Sign In
                           </button>
                         </div>
 
                         <div className="flex items-center justify-between pb-6">
                           <p
-                            className="text-sm text-black-500 align-baseline hover:text-blue-800  cursor-pointer"
+                            className="text-sm text-green-800 align-baseline hover:text-green-500  cursor-pointer"
                             onClick={() => navigate("/sign-up")}
                           >
-                            Create an Account
+                            Create an Account!
                           </p>
 
                           <p
-                            className="text-sm text-black-500 align-baseline hover:text-blue-800 text-right cursor-pointer"
+                            className="text-sm text-green-800 align-baseline hover:text-green-500 text-right cursor-pointer"
                             onClick={() => navigate("/forgot-password")}
                           >
                             Forgot password?
