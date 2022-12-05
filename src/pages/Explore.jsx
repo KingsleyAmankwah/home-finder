@@ -5,7 +5,7 @@ import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg";
 
 function Explore() {
   return (
-    <div className="font-[system-ui] m-[1rem] sm:m-[2rem] h-auto lg:h-[62vw]">
+    <div className="font-[system-ui] p-[1rem] sm:p-[2rem] h-auto lg:h-[62vw]">
       <header>
         <p className="text-3xl lg:text-5xl font-bold">Explore</p>
       </header>
