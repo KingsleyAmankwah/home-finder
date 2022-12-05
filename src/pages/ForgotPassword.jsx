@@ -1,7 +1,23 @@
 // import resetPasword from "../assets/jpg/reset-password.jpg";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { useState } from "react";
+import { toast } from "react-toastify";
 import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg";
 
 function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      await sendPasswordResetEmail(auth, email);
+      toast.success(`Reset link sent to ${email}`);
+    } catch (error) {
+      toast.error("Could not sent reset link");
+    }
+  };
+
   return (
     <>
       <div className="container my-[5rem] mx-auto">
@@ -21,7 +37,10 @@ function ForgotPassword() {
                   and we'll send you a link to reset your password!
                 </p>
               </div>
-              <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+              <form
+                className="px-8 pt-6 pb-8 mb-4 bg-white rounded"
+                onSubmit={onSubmit}
+              >
                 <div className="mb-4">
                   <label className="block mb-2 text-sm font-bold text-gray-700">
                     Email
@@ -30,12 +49,14 @@ function ForgotPassword() {
                     className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                     id="email"
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter Email Address..."
                   />
                 </div>
                 <div className="mb-6 text-center">
                   <button
-                    className="w-full px-4 py-2 font-bold text-white bg-red-500 rounded-full hover:bg-red-700 focus:outline-none focus:shadow-outline"
+                    className="w-full px-4 py-2 font-bold text-white bg-green-500 rounded-full hover:bg-green-700 focus:outline-none focus:shadow-outline"
                     type="button"
                   >
                     Reset Password
@@ -44,7 +65,7 @@ function ForgotPassword() {
                 <hr className="mb-6 border-t" />
                 <div className="text-center">
                   <a
-                    className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                    className="inline-block text-sm text-green-800 align-baseline hover:text-green-500"
                     href="/sign-up"
                   >
                     Create an Account!
@@ -52,7 +73,7 @@ function ForgotPassword() {
                 </div>
                 <div className="text-center">
                   <a
-                    className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                    className="inline-block text-sm text-green-800 align-baseline hover:text-green-500"
                     href="/sign-in"
                   >
                     Already have an account? Login!
