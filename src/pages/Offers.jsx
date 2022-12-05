@@ -3,7 +3,7 @@ import ListingItem from "../components/ListingItem";
 
 function Offers() {
   return (
-    <div className="font-[system-ui] m-[1rem] sm:m-[2rem]">
+    <div className="font-[system-ui] p-[1rem] sm:p-[2rem]">
       <header>
         <p className="text-3xl lg:text-5xl font-bold">Offers</p>
       </header>
