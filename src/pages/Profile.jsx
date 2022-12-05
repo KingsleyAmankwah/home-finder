@@ -13,7 +13,7 @@ function Profile() {
   };
 
   return (
-    <div className="profile font-[system-ui] m-[1rem] sm:m-[2rem]">
+    <div className="font-[system-ui] m-[1rem] sm:m-[2rem]">
       <header className="flex justify-between items-center">
         <p className="text-3xl lg:text-5xl font-bold">My Profile</p>
         <button
