@@ -12,7 +12,7 @@ function ForgotPassword() {
     try {
       const auth = getAuth();
       await sendPasswordResetEmail(auth, email);
-      toast.success(`Reset link sent to ${email}`);
+      toast.success(`Reset link sent to ${email}!`);
     } catch (error) {
       toast.error("Could not sent reset link");
     }
