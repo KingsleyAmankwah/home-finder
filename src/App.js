@@ -10,14 +10,14 @@ import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
-// import CreateListing from './pages/CreateListing'
+import CreateListing from "./pages/CreateListing";
 // import EditListing from './pages/EditListing'
 // import Listing from './pages/Listing'
 // import Contact from './pages/Contact'
 
 function App() {
   return (
-    <>
+    <div className="App bg-[#f2f4f8] m-0 p-0">
       <Router>
         <Routes>
           <Route path="/" element={<Explore />} />
@@ -28,10 +28,10 @@ function App() {
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
+          <Route path="/create-listing" element={<CreateListing />} />
 
           {/* 
           <Route path='/category/:categoryName' element={<Category />} />
-          <Route path='/create-listing' element={<CreateListing />} />
           <Route path='/edit-listing/:listingId' element={<EditListing />} />
           <Route
             path='/category/:categoryName/:listingId'
@@ -43,7 +43,7 @@ function App() {
       </Router>
 
       <ToastContainer />
-    </>
+    </div>
   );
 }
 
