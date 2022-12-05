@@ -23,12 +23,6 @@ function ForgotPassword() {
       <div className="container my-[5rem] mx-auto">
         <div className="flex justify-center items-center h-full px-6">
           <div className="w-full xl:w-3/4 lg:w-11/12 flex">
-            <img
-              className="w-full h-full object-cover bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
-              src={sellCategoryImage}
-              alt="banner"
-            />
-
             <div className="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
               <div className="px-8 mb-4 text-center">
                 <h3 className="pt-4 mb-2 text-2xl">Forgot Your Password?</h3>
@@ -81,6 +75,11 @@ function ForgotPassword() {
                 </div>
               </form>
             </div>
+            <img
+              className="w-full h-full object-cover bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
+              src={sellCategoryImage}
+              alt="banner"
+            />
           </div>
         </div>
       </div>
