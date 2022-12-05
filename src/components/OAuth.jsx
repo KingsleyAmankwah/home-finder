@@ -36,7 +36,7 @@ function OAuth() {
 
   return (
     <div onClick={onGoogleClick}>
-      <p className="cursor-pointer my-5 px-7 py-3 text-black font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center">
+      <p className="cursor-pointer my-5 sm:px-7 py-3 text-black font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center">
         <img src={google} alt="Logo" className="w-8 h-8" srcSet="" /> Sign{" "}
         {location.pathname === "/sign-up" ? "Up" : "In"} with Google
       </p>
