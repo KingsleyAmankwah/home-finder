@@ -53,14 +53,14 @@ function SignIn() {
                 src={sellCategoryImage}
                 alt="logo"
               />
-              <div className="px-8 mb-4 text-left">
+              <div className="sm:px-8 mb-4 text-left">
                 <h3 className="pt-4 mb-2 text-3xl">Welcome back!</h3>
                 <p className="mb-4 text-sm text-gray-700">
                   Please login to your account
                 </p>
               </div>
               <form
-                className="px-8 pt-6 pb-8 mb-4 bg-white rounded"
+                className="sm:px-8 sm:pt-6 pb-8 mb-4 bg-white rounded"
                 onSubmit={onSubmit}
               >
                 <div className="mb-4">
@@ -97,7 +97,7 @@ function SignIn() {
                     Sign In
                   </button>
                 </div>
-                <div className="flex items-center justify-between pb-6">
+                <div className="flex items-center flex-col sm:flex-row justify-around pb-6">
                   <p
                     className="text-sm text-green-800 align-baseline hover:text-green-500  cursor-pointer"
                     onClick={() => navigate("/sign-up")}
@@ -106,7 +106,7 @@ function SignIn() {
                   </p>
 
                   <p
-                    className="text-sm text-green-800 align-baseline hover:text-green-500 text-right cursor-pointer"
+                    className="text-sm text-green-800 align-baseline hover:text-green-500 pt-3 sm:pt-0 cursor-pointer"
                     onClick={() => navigate("/forgot-password")}
                   >
                     Forgot password?
