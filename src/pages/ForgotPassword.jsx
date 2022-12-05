@@ -20,7 +20,7 @@ function ForgotPassword() {
 
   return (
     <>
-      <div className="container my-[5rem] mx-auto">
+      <div className="container sm:py-[10rem] mx-auto">
         <div className="flex justify-center items-center h-full px-6">
           <div className="w-full xl:w-3/4 lg:w-11/12 flex">
             <div className="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
