@@ -9,6 +9,7 @@ import {
 import { toast } from "react-toastify";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
+import OAuth from "../components/OAuth";
 
 function Register() {
   const navigate = useNavigate();
@@ -151,6 +152,13 @@ function Register() {
                             Forgot password?
                           </p>
                         </div>
+
+                        <div className="flex items-center my-2 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
+                          <p className="text-center font-semibold mx-4 mb-0">
+                            OR
+                          </p>
+                        </div>
+                        <OAuth />
                       </form>
                     </div>
                   </div>
