@@ -27,7 +27,7 @@ function Navbar() {
           </li>
           <li
             className="flex flex-col items-center cursor-pointer text-[#8f8f8f]"
-            onClick={() => navigate("/sign-in")}
+            onClick={() => navigate("/profile")}
           >
             <PersonIcon fill={`#8f8f8f`} />
             <p>Profile</p>
