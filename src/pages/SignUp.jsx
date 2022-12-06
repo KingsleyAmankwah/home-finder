@@ -10,9 +10,11 @@ import { toast } from "react-toastify";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import OAuth from "../components/OAuth";
+import Spinner from "../components/Spinner";
 
 function Register() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -44,6 +46,7 @@ function Register() {
         email,
         password
       );
+      setLoading(true);
 
       const user = userCredentials.user;
       updateProfile(auth.currentUser, {
@@ -56,10 +59,17 @@ function Register() {
 
       await setDoc(doc(db, "users", user.uid), formDataCopy);
       navigate("/");
+      toast.success(`Welcome to your dashboard`);
+      setLoading(false);
     } catch (error) {
       toast.error("Sorry something went wrong");
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <>
