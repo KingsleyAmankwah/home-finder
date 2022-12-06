@@ -1,36 +1,60 @@
 import { useState } from "react";
-
+import "../App.css";
 import Spinner from "../components/Spinner";
 
 function CreateListing() {
   const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     type: "rent",
     name: "",
+    bedrooms: 1,
+    bathrooms: 1,
     parking: false,
     furnished: false,
+    address: "",
+    offer: false,
+    regularPrice: 0,
+    discountedPrice: 0,
+    images: {},
+    latitude: 0,
+    longitude: 0,
   });
 
-  const { type, name, parking, furnished } = formData;
+  const {
+    type,
+    name,
+    bedrooms,
+    bathrooms,
+    parking,
+    furnished,
+    address,
+    offer,
+    regularPrice,
+    discountedPrice,
+    images,
+    latitude,
+    longitude,
+  } = formData;
 
-  // const onChange = (e) => {
-  //   let boolean = null;
+  const onChange = (e) => {
+    let boolean = null;
 
-  //   if (e.target.value === "true") {
-  //     boolean = true;
-  //   }
-  //   if (e.target.value === "false") {
-  //     boolean = false;
-  //   }
+    if (e.target.value === "true") {
+      boolean = true;
+    }
+    if (e.target.value === "false") {
+      boolean = false;
+    }
 
-  //   // Text/Booleans/Numbers
-  //   if (!e.target.files) {
-  //     setFormData((prevState) => ({
-  //       ...prevState,
-  //       [e.target.id]: boolean ?? e.target.value,
-  //     }));
-  //   }
-  // };
+    // Text/Booleans/Numbers
+    if (!e.target.files) {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.id]: boolean ?? e.target.value,
+      }));
+    }
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -50,26 +74,23 @@ function CreateListing() {
       <main className="mt-4">
         <form onSubmit={onSubmit}>
           <label className="formLabel font-[600] mt-4 block">Sell / Rent</label>
-          <div className="formButtons flex">
+
+          <div className="flex">
             <button
               type="button"
-              className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] ${
-                type === "sale" ?? "bg-[#00cc66]"
-              }`}
+              className={type === "sale" ? "formButtonActive" : "formButton"}
               id="type"
               value="sale"
-              // onChange={onChange}
+              onClick={onChange}
             >
               Sell
             </button>
             <button
               type="button"
+              className={type === "rent" ? "formButtonActive" : "formButton"}
               id="type"
-              className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] ${
-                type === "rent" && "bg-[#00cc66] text-white"
-              }`}
               value="rent"
-              // onChange={onChange}
+              onClick={onChange}
             >
               Rent
             </button>
@@ -95,6 +116,7 @@ function CreateListing() {
                 className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
                 type="number"
                 id="bedrooms"
+                value={bedrooms}
                 min="1"
                 max="50"
                 required
@@ -108,6 +130,7 @@ function CreateListing() {
                 className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
                 type="number"
                 id="bathrooms"
+                value={bathrooms}
                 min="1"
                 max="50"
                 required
@@ -121,23 +144,23 @@ function CreateListing() {
           <div className="formButtons flex">
             <button
               type="button"
-              className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] ${
-                parking && `bg-[#00cc66] text-white`
-              }`}
               id="parking"
               value={true}
+              className={parking ? "formButtonActive" : "formButton"}
               min="1"
               max="50"
+              onChange={onChange}
             >
               Yes
             </button>
             <button
               type="button"
-              className={`${
-                !parking && `bg-[#00cc66] text-white`
-              } flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
               id="parking"
+              className={
+                !parking && parking !== null ? "formButtonActive" : "formButton"
+              }
               value={false}
+              onChange={onChange}
             >
               No
             </button>
@@ -147,21 +170,23 @@ function CreateListing() {
           <div className="flex">
             <button
               type="button"
-              className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] ${
-                parking && `bg-[#00cc66] text-white`
-              }`}
+              className={furnished ? "formButtonActive" : "formButton"}
               id="furnished"
               value={true}
+              onChange={onChange}
             >
               Yes
             </button>
             <button
               type="button"
-              className={`${
-                !furnished && `bg-[#00cc66] text-white`
-              } flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
+              className={
+                !furnished && furnished !== null
+                  ? "formButtonActive"
+                  : "formButton"
+              }
               id="furnished"
               value={false}
+              onChange={onChange}
             >
               No
             </button>
@@ -172,6 +197,7 @@ function CreateListing() {
             className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
             type="text"
             id="address"
+            value={address}
             required
           />
 
@@ -184,6 +210,7 @@ function CreateListing() {
                 className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
                 type="number"
                 id="latitude"
+                value={latitude}
                 required
               />
             </div>
@@ -195,6 +222,7 @@ function CreateListing() {
                 className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
                 type="number"
                 id="longitude"
+                value={longitude}
                 required
               />
             </div>
@@ -204,14 +232,17 @@ function CreateListing() {
           <div className="formButtons flex">
             <button
               type="button"
-              className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
+              className={offer ? "formButtonActive" : "formButton"}
+              name="offer"
               id="offer"
               value={true}
             >
               Yes
             </button>
             <button
-              className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
+              className={
+                !offer && offer !== null ? "formButtonActive" : "formButton"
+              }
               type="button"
               id="offer"
               value={false}
@@ -226,6 +257,7 @@ function CreateListing() {
               className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
               type="number"
               id="regularPrice"
+              value={regularPrice}
               min="50"
               max="750000000"
               required
@@ -238,6 +270,7 @@ function CreateListing() {
               className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
               type="number"
               id="discountedPrice"
+              value={discountedPrice}
               min="50"
               max="750000000"
             />
