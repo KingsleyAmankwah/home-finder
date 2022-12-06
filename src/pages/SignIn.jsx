@@ -4,7 +4,7 @@ import OAuth from "../components/OAuth";
 import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
-
+import Spinner from "../components/Spinner";
 function SignIn() {
   const navigate = useNavigate();
 
@@ -12,6 +12,7 @@ function SignIn() {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const { email, password } = formData;
 
@@ -24,6 +25,7 @@ function SignIn() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const auth = getAuth();
@@ -35,12 +37,18 @@ function SignIn() {
       );
       if (userCredentials.user) {
         navigate("/");
-        toast.success(`Logged In as ${userCredentials.name}`);
+        toast.success(`Logged In as successfully`);
+        setLoading(false);
       }
     } catch (error) {
       toast.error("Invalid credentials");
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <>
