@@ -29,6 +29,7 @@ function OAuth() {
         });
       }
       navigate("/");
+      toast.success("Logged In successfully");
     } catch (error) {
       toast.error("Could not authorize with google");
     }
