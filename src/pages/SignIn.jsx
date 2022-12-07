@@ -67,10 +67,7 @@ function SignIn() {
                   Please login to your account
                 </p>
               </div>
-              <form
-                className="sm:px-8 sm:pt-6 pb-8 mb-4 bg-white rounded"
-                onSubmit={onSubmit}
-              >
+              <form className="sm:px-8 sm:pt-6 pb-8 mb-4 bg-white rounded"   onSubmit={onSubmit}>
                 <div className="mb-4">
                   <label className="block mb-2 text-sm font-bold text-gray-700">
                     Email
