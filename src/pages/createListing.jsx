@@ -4,7 +4,7 @@ import Spinner from "../components/Spinner";
 
 function CreateListing() {
   const [loading, setLoading] = useState(false);
-  const [geolocationEnabled, setGeolocationEnabled] = useState(true);
+  const [geolocationEnabled] = useState(true);
   const [formData, setFormData] = useState({
     type: "rent",
     name: "",
@@ -32,7 +32,7 @@ function CreateListing() {
     offer,
     regularPrice,
     discountedPrice,
-    images,
+    // images,
     latitude,
     longitude,
   } = formData;
