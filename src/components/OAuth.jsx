@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function OAuth() {
-  const navigate = useNavigate();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const onGoogleClick = async () => {
     try {
