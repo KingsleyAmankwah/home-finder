@@ -5,9 +5,9 @@ import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+
 function SignIn() {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -67,7 +67,10 @@ function SignIn() {
                   Please login to your account
                 </p>
               </div>
-              <form className="sm:px-8 sm:pt-6 pb-8 mb-4 bg-white rounded"   onSubmit={onSubmit}>
+              <form
+                className="sm:px-8 sm:pt-6 pb-8 mb-4 bg-white rounded"
+                onSubmit={onSubmit}
+              >
                 <div className="mb-4">
                   <label className="block mb-2 text-sm font-bold text-gray-700">
                     Email
