@@ -16,7 +16,6 @@ import CreateListing from "./pages/CreateListing";
 // import Contact from './pages/Contact'
 
 function App() {
-  
   return (
     <div className="App sm:bg-[#f2f4f8] m-0 p-0 w-full h-full">
       <Router>
