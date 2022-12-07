@@ -28,8 +28,9 @@ function OAuth() {
           timestamp: serverTimestamp(),
         });
       }
-      navigate("/");
+
       toast.success("Logged In successfully");
+      navigate("/");
     } catch (error) {
       toast.error("Could not authorize with google");
     }
