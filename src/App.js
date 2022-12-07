@@ -17,7 +17,7 @@ import CreateListing from "./pages/CreateListing";
 
 function App() {
   return (
-    <div className="App sm:bg-[#f2f4f8] m-0 p-0 w-full h-auto">
+    <div className="App sm:bg-[#f2f4f8] m-0 p-0 w-full h-full">
       <Router>
         <Routes>
           <Route path="/" element={<Explore />} />
