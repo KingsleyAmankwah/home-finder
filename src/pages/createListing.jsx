@@ -37,7 +37,11 @@ function CreateListing() {
         }
       });
     }
-  }, []);
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, [isMounted, auth, navigate, formData]);
 
   const {
     type,
