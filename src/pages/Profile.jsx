@@ -5,7 +5,7 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase.config";
+import { db } from "../components/firebase.config";
 
 function Profile() {
   const auth = getAuth();
