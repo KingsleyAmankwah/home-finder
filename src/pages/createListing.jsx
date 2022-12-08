@@ -2,6 +2,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "../App.css";
 import Spinner from "../components/Spinner";
 
@@ -81,6 +82,14 @@ function CreateListing() {
   const onSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (discountedPrice >= regularPrice) {
+      setLoading(false);
+      toast.error("Discounted price needs to be less than regular price");
+      return;
+    }
+
+    
   };
 
   if (loading) {
