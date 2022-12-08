@@ -89,7 +89,11 @@ function CreateListing() {
       return;
     }
 
-    
+       if (images.length > 6) {
+      setLoading(false)
+      toast.error('Max 6 images')
+      return
+    }
   };
 
   if (loading) {
