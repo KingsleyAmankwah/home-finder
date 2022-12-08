@@ -16,8 +16,9 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../components/firebase.config";
 
 function CreateListing() {
-  const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line
   const [geolocationEnabled, setGeolocationEnabled] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     type: "rent",
     name: "",
