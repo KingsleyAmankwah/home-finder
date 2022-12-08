@@ -28,6 +28,16 @@ function App() {
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
+
+          {/* <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            /> */}
+
           <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/contact" element={<Contact />} />
 
