@@ -235,7 +235,7 @@ function CreateListing() {
 
           <label className="font-[600] mt-4 block">Name</label>
           <input
-            className="flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem]"
+            className="flex justify-center items-center text-left bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem]"
             type="text"
             id="name"
             value={name}
@@ -331,7 +331,7 @@ function CreateListing() {
 
           <label className="font-[600] mt-4 block">Address</label>
           <textarea
-            className={`flex justify-center items-center text-center bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
+            className={`text-flex justify-center items-center  bg-white font-[600] py-[0.9rem] px-[3rem] rounded-2xl mt-[0.5rem] mr-[0.5rem] `}
             type="text"
             id="address"
             value={address}
