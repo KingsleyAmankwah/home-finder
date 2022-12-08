@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-function useAuthStatus() {
+export const useAuthStatus = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [checkingStatus, setCheckingStatus] = useState(true);
   const isMounted = useRef(true);
@@ -24,6 +23,10 @@ function useAuthStatus() {
   }, [isMounted]);
 
   return { loggedIn, checkingStatus };
-}
+};
 
-export default useAuthStatus;
+// Protected routes in v6
+// https://stackoverflow.com/questions/65505665/protected-route-with-firebase
+
+// Fix memory leak warning
+// https://stackoverflow.com/questions/59780268/cleanup-memory-leaks-on-an-unmounted-component-in-react-hooks
