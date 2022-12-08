@@ -27,23 +27,39 @@ function SignIn() {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      const auth = getAuth();
-
-      const userCredentials = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      if (userCredentials.user) {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        toast.success(`${user.displayName}, Welcome Back!`);
         navigate("/");
-        toast.success(`Logged In as successfully`);
         setLoading(false);
-      }
-    } catch (error) {
-      toast.error("Invalid credentials");
-      setLoading(false);
-    }
+      })
+      .catch((error) => {
+        // const errorCode = error.code;
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+        setLoading(false);
+      });
+
+    // try {
+    //   const auth = getAuth();
+
+    //   const userCredentials = await signInWithEmailAndPassword(
+    //     auth,
+    //     email,
+    //     password
+    //   );
+    //   if (userCredentials.user) {
+    //     navigate("/");
+    //     toast.success(`Logged In as successfully`);
+    //     setLoading(false);
+    //   }
+    // } catch (error) {
+    //   toast.error("Invalid credentials");
+    //   setLoading(false);
+    // }
   };
 
   if (loading) {
