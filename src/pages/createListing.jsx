@@ -1,10 +1,13 @@
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 import Spinner from "../components/Spinner";
 
 function CreateListing() {
   const [loading, setLoading] = useState(false);
-  const [geolocationEnabled] = useState(true);
+  const [geolocationEnabled, setGeolocationEnabled] = useState(true);
   const [formData, setFormData] = useState({
     type: "rent",
     name: "",
@@ -20,6 +23,21 @@ function CreateListing() {
     latitude: 0,
     longitude: 0,
   });
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    if (isMounted) {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setFormData({ ...formData, userRef: user.uid });
+        } else {
+          navigate("/sign-in");
+        }
+      });
+    }
+  }, []);
 
   const {
     type,
@@ -32,7 +50,7 @@ function CreateListing() {
     offer,
     regularPrice,
     discountedPrice,
-    // images,
+    images,
     latitude,
     longitude,
   } = formData;
