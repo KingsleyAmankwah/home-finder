@@ -7,9 +7,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { toast } from "react-toastify";
-import { setDoc, doc, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebase.config";
-import OAuth from "../components/OAuth";
 import Spinner from "../components/Spinner";
 
 function Register() {
@@ -33,38 +30,34 @@ function Register() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    try {
-      const auth = getAuth();
+    const auth = getAuth();
 
-      if (password !== password2) {
-        toast.error("The two passwords do not match!");
-      }
-
-      const userCredentials = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      setLoading(true);
-
-      const user = userCredentials.user;
-      updateProfile(auth.currentUser, {
-        displayName: name,
-      });
-
-      const formDataCopy = { ...formData };
-      delete formDataCopy.password;
-      formDataCopy.timestamp = serverTimestamp();
-
-      await setDoc(doc(db, "users", user.uid), formDataCopy);
-      navigate("/");
-      toast.success(`Welcome to your dashboard`);
+    if (password !== password2) {
+      toast.error("The two passwords do not match!");
       setLoading(false);
-    } catch (error) {
-      toast.error("Sorry something went wrong");
-      setLoading(false);
+      return;
     }
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        });
+
+        setLoading(false);
+        toast.success(`${user.email} registered succesfully!`);
+        navigate("/");
+      })
+      .catch((error) => {
+        // const errorCode = error.code;
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+        setLoading(false);
+      });
   };
 
   if (loading) {
@@ -151,7 +144,7 @@ function Register() {
                     className="bg-green-500  hover:bg-green-700 inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight rounded-xl shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
                     type="submit"
                   >
-                    Sign In
+                    Sign Up
                   </button>
                 </div>
                 <div className="flex items-center flex-col sm:flex-row justify-around pb-6">
@@ -169,11 +162,6 @@ function Register() {
                     Forgot password?
                   </p>
                 </div>
-
-                <div className="flex items-center my-2 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                  <p className="text-center font-semibold mx-4 mb-0">OR</p>
-                </div>
-                <OAuth />
               </form>
             </div>
 
