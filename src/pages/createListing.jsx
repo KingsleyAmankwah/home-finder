@@ -6,13 +6,8 @@ import { toast } from "react-toastify";
 import "../App.css";
 import Spinner from "../components/Spinner";
 import { v4 as uuidv4 } from "uuid";
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../components/firebase.config";
 
 function CreateListing() {
@@ -30,7 +25,7 @@ function CreateListing() {
     offer: false,
     regularPrice: 0,
     discountedPrice: 0,
-    images: [],
+    images: {},
     // latitude: 0,
     // longitude: 0,
   });
@@ -67,8 +62,7 @@ function CreateListing() {
     return () => {
       isMounted.current = false;
     };
-   
-  }, [isMounted]);
+  }, [auth, formData, isMounted, navigate]);
 
   const onMutate = (e) => {
     let boolean = null;
@@ -80,6 +74,14 @@ function CreateListing() {
       boolean = false;
     }
 
+    // Files
+    if (e.target.files) {
+      setFormData((prevState) => ({
+        ...prevState,
+        images: e.target.files,
+      }));
+    }
+
     // Text/Booleans/Numbers
     if (!e.target.files) {
       setFormData((prevState) => ({
@@ -89,23 +91,29 @@ function CreateListing() {
     }
   };
 
+  const user = auth.currentUser;
+  if (!user) {
+    throw new Error("User not authenticated");
+  }
+
   const onSubmit = async (e) => {
     // setLoading(true);
     e.preventDefault();
 
     // Create a new listing object with the input field values
     const listing = {
-      id: `${Date.now()}`,
+      userRef: user.uid,
       type,
       name,
-      bedrooms: parseInt(bedrooms),
-      bathrooms: parseInt(bathrooms),
+      bedrooms,
+      bathrooms,
       parking,
       furnished,
       address,
-      regularPrice: parseInt(regularPrice),
+      regularPrice,
       offer,
-      // ...
+      dateTime: `${Date.now()}`,
+      timestamp: serverTimestamp(),
     };
 
     if (offer && discountedPrice) {
@@ -113,41 +121,44 @@ function CreateListing() {
     }
 
     if (discountedPrice >= regularPrice) {
-      // setLoading(false);
       toast.error("Discounted price needs to be less than regular price");
       return;
     }
 
     if (images.length > 6) {
-      // setLoading(false);
       toast.error("Max 6 images");
       return;
     }
 
     try {
       setLoading(true);
-      const storageRef = getStorage();
+      const storage = getStorage();
 
       const imageUrls = [];
       for (const image of images) {
-        const filename = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
-        const imageRef = storageRef.child(filename);
-        await imageRef.put(image);
-        const url = await imageRef.getDownloadURL();
+        const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
+        const storageRef = ref(storage, "images/" + fileName);
+        await uploadBytes(storageRef, image);
+        const fileRef = ref(storage, "images/" + fileName);
+        const url = await getDownloadURL(fileRef);
         imageUrls.push(url);
       }
 
       // Add image URLs to the listing object
       listing.images = imageUrls;
 
+      if (!imageUrls) {
+        toast.error("No image urls");
+        return;
+      }
+
       // Save the listing to Firestore
       const docRef = await addDoc(collection(db, "listings"), listing);
       setLoading(false);
-      toast.success("Listing created with ID: ", docRef.id);
+      toast.success(`Listing created with ID: ${docRef.id}`);
       navigate("/profile");
       // Reset the form and state
       e.target.reset();
-      images([]);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -160,7 +171,9 @@ function CreateListing() {
 
   //   if (discountedPrice >= regularPrice) {
   //     setLoading(false);
-  //    return toast.error("Discounted price needs to be less than regular price");
+  //     return toast.error(
+  //       "Discounted price needs to be less than regular price"
+  //     );
   //   }
 
   //   if (images.length > 6) {
@@ -169,7 +182,7 @@ function CreateListing() {
   //     return;
   //   }
 
-  //   let geolocation = {};
+  //   //   let geolocation = {};
 
   //   //Store images in firebase
   //   const storeImage = async (image) => {
@@ -217,22 +230,23 @@ function CreateListing() {
   //     return;
   //   });
 
-  //   const formDataCopy = {
+  //   const listing = {
   //     ...formData,
   //     imgUrls,
-  //     geolocation,
+  //     // geolocation,
   //     timestamp: serverTimestamp(),
   //   };
 
-  //   formDataCopy.location = address;
-  //   delete formDataCopy.images;
-  //   delete formDataCopy.address;
-  //   !formDataCopy.offer && delete formDataCopy.discountedPrice;
+  //   //   formDataCopy.location = address;
+  //   delete listing.images;
+  //   //   delete formDataCopy.address;
+  //   !listing.offer && delete listing.discountedPrice;
 
-  //   const docRef = await addDoc(collection(db, "listings"), formDataCopy);
+  //   const docRef = await addDoc(collection(db, "listings"), listing);
   //   setLoading(false);
-  //   toast.success("Listing  saved");
-  //   navigate(`/category/${formDataCopy.type}/${docRef.id}`);
+  //   toast.success(`Listing created with ID: ${docRef.id}`);
+  //   // navigate(`/category/${listing.type}/${docRef.id}`);
+  //   navigate("/profile");
   // };
 
   if (loading) {
@@ -457,7 +471,7 @@ function CreateListing() {
                 id="discountedPrice"
                 value={discountedPrice}
                 onChange={onMutate}
-                min="50"
+                min="20"
                 max="750000000"
               />
             </>
