@@ -13,14 +13,14 @@ function ListingItem({ listing, id, onEdit, onDelete }) {
         <img
           src={listing.images[0]}
           alt={listing.name}
-          className="sm:w-[30%] sm:h-[217px] w-full object-cover rounded-2xl"
+          className="sm:w-[30%] w-full object-cover rounded-2xl"
         />
-        <div className="w-full sm:w-[65%] mt-[1rem]">
+        <div className="w-full sm:w-[65%] lg:mt-[1rem]">
           <p className="font-[600] opacity-[50] text-[0.7rem]">
             {listing.location}
           </p>
-          <p className="font-bold text-2xl">{listing.name}</p>
-          <p className="flex items-center font-bold text-3xl my-[0.5rem] text-[#00cc66]">
+          <p className="font-bold lg:text-2xl">{listing.name}</p>
+          <p className="flex items-center font-bold lg:text-3xl my-[0.5rem] text-[#00cc66]">
             Ghs 1505.00
           </p>
 
@@ -41,15 +41,19 @@ function ListingItem({ listing, id, onEdit, onDelete }) {
         </div>
       </Link>
 
-      {onDelete && (
-        <DeleteIcon
-          className="removeIcon"
-          fill="rgb(231, 76,60)"
-          onClick={() => onDelete(listing.id, listing.name)}
-        />
-      )}
+      <div className="flex">
+        {onDelete && (
+          <DeleteIcon
+            className="removeIcon text-[2px]"
+            fill="rgb(231, 76,60)"
+            onClick={() => onDelete(listing.id, listing.name)}
+          />
+        )}
 
-      {onEdit && <EditIcon className="editIcon" onClick={() => onEdit(id)} />}
+        {onEdit && (
+          <EditIcon className="editIcon text-sm" onClick={() => onEdit(id)} />
+        )}
+      </div>
     </li>
   );
 }
