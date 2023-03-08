@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../components/firebase.config";
 import ListingItem from "../components/ListingItem";
+import Spinner from "../components/Spinner";
 
 function Profile() {
   const auth = getAuth();
@@ -100,6 +101,8 @@ function Profile() {
 
   const onEdit = (listingId) => navigate(`/edit-listing/${listingId}`);
 
+  if (loading) return <Spinner />;
+
   return (
     <div className="font-[system-ui] p-[1rem] sm:p-[2rem]">
       <header className="flex justify-between items-center">
@@ -171,7 +174,7 @@ function Profile() {
               {listings.map((listing) => (
                 <ListingItem
                   key={listing.id}
-                  listing={listing.data()}
+                  listing={listing.data}
                   id={listing.id}
                   onDelete={() => onDelete(listing.id)}
                   onEdit={() => onEdit(listing.id)}
