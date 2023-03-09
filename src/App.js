@@ -32,16 +32,6 @@ function App() {
             <Route path="/create-listing" element={<CreateListing />} />
           </Route>
 
-          {/* <Route
-              path="/profile"
-              element={
-                <PrivateRoute>
-                  <Profile />
-                </PrivateRoute>
-              }
-            /> */}
-
-          {/* <Route path="/create-listing" element={<CreateListing />} /> */}
           <Route path="/contact" element={<Contact />} />
 
           {/* 
