@@ -37,9 +37,12 @@ function SignIn() {
         setLoading(false);
       })
       .catch((error) => {
-        // const errorCode = error.code;
         const errorMessage = error.message;
-        toast.error(errorMessage);
+        const errorCode = errorMessage.match(/auth\/\S+/)[0].split("/")[1];
+        const errorName = errorCode.replace(/-/g, " ");
+        const capitalizedErrorName =
+          errorName.charAt(0).toUpperCase() + errorName.slice(1);
+        toast.error(capitalizedErrorName.slice(0, -1));
         setLoading(false);
       });
 
