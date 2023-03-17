@@ -15,9 +15,9 @@ function ListingItem({ listing, id, onEdit, onDelete }) {
           alt={listing.name}
           className="lg:w-[19%] lg:h-[217px] w-[30%] h-[100px] object-cover rounded-3xl"
         />
-        <div className="w-[65%] lg:w-[79%] lg:mt-[1rem]">
+        <div className="w-full lg:w-[79%] lg:mt-[1rem]">
           <p className="font-[600] opacity-[50] text-[0.7rem]">
-            {listing.location}
+            {listing.address}
           </p>
           <p className="font-bold lg:text-2xl">{listing.name}</p>
           <p className="flex items-center font-bold lg:text-3xl my-[0.5rem] text-[#00cc66]">
