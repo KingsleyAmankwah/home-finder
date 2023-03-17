@@ -8,14 +8,14 @@ import bathtubIcon from "../assets/svg/bathtubIcon.svg";
 
 function ListingItem({ listing, id, onEdit, onDelete }) {
   return (
-    <li className="categoryListing sm:flex justify-between items-center mb-[1rem] relative">
+    <li className="categoryListing flex justify-between items-center mb-[1rem] relative">
       <Link to={`/category/${listing.type}/${id}`} className="contents">
         <img
           src={listing.images[0]}
           alt={listing.name}
-          className="sm:w-[30%] w-full object-cover rounded-2xl"
+          className="lg:w-[19%] lg:h-[217px] w-[30%] h-[100px] object-cover rounded-3xl"
         />
-        <div className="w-full sm:w-[65%] lg:mt-[1rem]">
+        <div className="w-[65%] lg:w-[79%] lg:mt-[1rem]">
           <p className="font-[600] opacity-[50] text-[0.7rem]">
             {listing.location}
           </p>
@@ -24,7 +24,7 @@ function ListingItem({ listing, id, onEdit, onDelete }) {
             Ghs 1505.00
           </p>
 
-          <div className="flex justify-between w-full sm:max-w-[275px]">
+          <div className="flex justify-between max-w-[275px]">
             <img src={bedIcon} alt="bed" />
             <p className="font-light text-sm">
               {listing.bedrooms > 1
