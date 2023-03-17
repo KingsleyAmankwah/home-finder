@@ -21,6 +21,7 @@ function Offers() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
+        // setLoading(true);
         const listingsRef = collection(db, "listings");
 
         const q = query(
@@ -45,10 +46,10 @@ function Offers() {
         });
 
         setListings(listings);
-
         setLoading(false);
       } catch (error) {
         toast.error("Could not fetch listings");
+        // console.log(error.message);
       }
     };
 
@@ -99,7 +100,13 @@ function Offers() {
         <>
           <main>
             <ul className="p-0 mt-[3rem]">
-              <ListingItem />
+              {listings.map((listing) => (
+                <ListingItem
+                  listing={listing.data}
+                  id={listing.id}
+                  key={listing.id}
+                />
+              ))}
             </ul>
           </main>
           <br />
