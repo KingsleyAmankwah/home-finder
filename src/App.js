@@ -39,24 +39,25 @@ function App() {
       <div>{!isOnline && <NoInternet />}</div>
 
       {isOnline && (
-        <div className="App sm:bg-[#f2f4f8] m-0 p-0 w-full h-full">
-          <Router>
-            <Routes>
-              <Route path="/" element={<Explore />} />
-              <Route path="/offers" element={<Offers />} />
-              <Route path="/sign-in" element={<SignIn />} />
-              <Route path="/sign-up" element={<SignUp />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/profile" element={<PrivateRoute />}>
-                <Route path="/profile" element={<Profile />} />
-              </Route>
-              <Route path="/create-listing" element={<PrivateRoute />}>
-                <Route path="/create-listing" element={<CreateListing />} />
-              </Route>
+        <>
+          <div className="App sm:bg-[#f2f4f8] m-0 p-0 w-full h-full">
+            <Router>
+              <Routes>
+                <Route path="/" element={<Explore />} />
+                <Route path="/offers" element={<Offers />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/profile" element={<PrivateRoute />}>
+                  <Route path="/profile" element={<Profile />} />
+                </Route>
+                <Route path="/create-listing" element={<PrivateRoute />}>
+                  <Route path="/create-listing" element={<CreateListing />} />
+                </Route>
 
-              <Route path="/contact" element={<Contact />} />
+                <Route path="/contact" element={<Contact />} />
 
-              {/* 
+                {/* 
           <Route path='/category/:categoryName' element={<Category />} />
           <Route path='/edit-listing/:listingId' element={<EditListing />} />
           <Route
@@ -65,13 +66,14 @@ function App() {
           />
           
         */}
-            </Routes>
-          </Router>
+              </Routes>
+            </Router>
 
-          <ToastContainer />
-        </div>
+            <ToastContainer />
+          </div>
+          <Navbar />
+        </>
       )}
-      <Navbar />
     </>
   );
 }
