@@ -8,7 +8,7 @@ import Spinner from "../components/Spinner";
 import { v4 as uuidv4 } from "uuid";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "../components/firebase.config";
+import { db } from "../firebase-config";
 
 function CreateListing() {
   // eslint-disable-next-line
