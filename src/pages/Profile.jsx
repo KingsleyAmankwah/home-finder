@@ -14,7 +14,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { db } from "../components/firebase.config";
+import { db } from "../firebase-config";
 import ListingItem from "../components/ListingItem";
 import Spinner from "../components/Spinner";
 
