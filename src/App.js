@@ -11,7 +11,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import CreateListing from "./pages/CreateListing";
-// import EditListing from './pages/EditListing'
+import EditListing from "./pages/EditListing";
 // import Listing from './pages/Listing'
 import Contact from "./pages/Contact";
 import NoInternet from "./components/NoInternet";
@@ -39,40 +39,38 @@ function App() {
       <div>{!isOnline && <NoInternet />}</div>
 
       {isOnline && (
-        <>
-          <div className="App sm:bg-[#f2f4f8] m-0 p-0 w-full h-full">
-            <Router>
-              <Routes>
-                <Route path="/" element={<Explore />} />
-                <Route path="/offers" element={<Offers />} />
-                <Route path="/sign-in" element={<SignIn />} />
-                <Route path="/sign-up" element={<SignUp />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/profile" element={<PrivateRoute />}>
-                  <Route path="/profile" element={<Profile />} />
-                </Route>
-                <Route path="/create-listing" element={<PrivateRoute />}>
-                  <Route path="/create-listing" element={<CreateListing />} />
-                </Route>
+        <div className="App sm:bg-[#f2f4f8] m-0 p-0 w-full h-full">
+          <Router>
+            <Routes>
+              <Route path="/" element={<Explore />} />
+              <Route path="/offers" element={<Offers />} />
+              <Route path="/sign-in" element={<SignIn />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/profile" element={<PrivateRoute />}>
+                <Route path="/profile" element={<Profile />} />
+              </Route>
+              <Route path="/create-listing" element={<PrivateRoute />}>
+                <Route path="/create-listing" element={<CreateListing />} />
+              </Route>
 
-                <Route path="/contact" element={<Contact />} />
+              <Route path="/contact" element={<Contact />} />
 
-                {/* 
-          <Route path='/category/:categoryName' element={<Category />} />
-          <Route path='/edit-listing/:listingId' element={<EditListing />} />
-          <Route
-          path='/category/:categoryName/:listingId'
-          element={<Listing />}
-          />
-          
-        */}
-              </Routes>
-            </Router>
+              {/* <Route path='/category/:categoryName' element={<Category />} /> */}
+              <Route
+                path="/edit-listing/:listingId"
+                element={<EditListing />}
+              />
+              {/* <Route
+                path="/category/:categoryName/:listingId"
+                element={<Listing />}
+              /> */}
+            </Routes>
+            <Navbar />
+          </Router>
 
-            <ToastContainer />
-          </div>
-          <Navbar />
-        </>
+          <ToastContainer />
+        </div>
       )}
     </>
   );
