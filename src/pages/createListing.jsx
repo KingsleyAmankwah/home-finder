@@ -1,5 +1,6 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useEffect, useRef } from "react";
+// eslint-disable
+import { getAuth } from "firebase/auth";
+// import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -11,7 +12,6 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase-config";
 
 function CreateListing() {
-  // eslint-disable-next-line
   // const [geolocationEnabled, setGeolocationEnabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -155,8 +155,8 @@ function CreateListing() {
       // Save the listing to Firestore
       const docRef = await addDoc(collection(db, "listings"), listing);
       setLoading(false);
-      toast.success(`Listing created with ID: ${docRef.id}`);
-      navigate("/profile");
+      toast.success(`Listing created Successfully`);
+      navigate(`/category/${listing.type}/${docRef.id}`);
       // Reset the form and state
       e.target.reset();
     } catch (error) {
