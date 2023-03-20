@@ -5,14 +5,14 @@ import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 import Explore from "./pages/Explore";
 import Offers from "./pages/Offers";
-// import Category from './pages/Category'
+import Category from "./pages/Category";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import CreateListing from "./pages/CreateListing";
 import EditListing from "./pages/EditListing";
-// import Listing from './pages/Listing'
+import Listing from "./pages/Listing";
 import Contact from "./pages/Contact";
 import NoInternet from "./components/NoInternet";
 import { useEffect, useState } from "react";
@@ -56,15 +56,15 @@ function App() {
 
               <Route path="/contact" element={<Contact />} />
 
-              {/* <Route path='/category/:categoryName' element={<Category />} /> */}
+              <Route path="/category/:categoryName" element={<Category />} />
               <Route
                 path="/edit-listing/:listingId"
                 element={<EditListing />}
               />
-              {/* <Route
+              <Route
                 path="/category/:categoryName/:listingId"
                 element={<Listing />}
-              /> */}
+              />
             </Routes>
             <Navbar />
           </Router>
