@@ -4,8 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 function EditListing() {
   const [loading, setLoading] = useState(false);
@@ -71,29 +72,24 @@ function EditListing() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMounted]);
 
-   // Fetch listing to edit
-   useEffect(() => {
-    setLoading(true)
-    const fetchListing = async () => {
-      const docRef = doc(db, 'listings', params.listingId)
-      const docSnap = await getDoc(docRef)
-      if (docSnap.exists()) {
-        setListing(docSnap.data())
-        setFormData({ ...docSnap.data(), address: docSnap.data().location })
-        setLoading(false)
-      } else {
-        navigate('/')
-        toast.error('Listing does not exist')
-      }
-    }
-
-    fetchListing()
-  }, [params.listingId, navigate])
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  // Fetch listing to edit
+  useEffect(() => {
     setLoading(true);
-  };
+    const fetchListing = async () => {
+      const docRef = doc(db, "listings", params.listingId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setListing(docSnap.data());
+        setFormData({ ...docSnap.data() });
+        setLoading(false);
+      } else {
+        navigate("/");
+        toast.error("Listing does not exist");
+      }
+    };
+
+    fetchListing();
+  }, [params.listingId, navigate]);
 
   const onMutate = (e) => {
     let boolean = null;
@@ -119,6 +115,65 @@ function EditListing() {
         ...prevState,
         [e.target.id]: boolean ?? e.target.value,
       }));
+    }
+  };
+
+  const onSubmit = async (e) => {
+    // setLoading(true);
+    e.preventDefault();
+
+    if (offer && discountedPrice) {
+      listing.discountedPrice = parseInt(discountedPrice);
+    }
+
+    if (discountedPrice >= regularPrice) {
+      toast.error("Discounted price needs to be less than regular price");
+      return;
+    }
+
+    if (images.length > 6) {
+      toast.error("Max 6 images");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const storage = getStorage();
+
+      const imageUrls = [];
+      for (const image of images) {
+        const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
+        const storageRef = ref(storage, "images/" + fileName);
+        await uploadBytes(storageRef, image);
+        const fileRef = ref(storage, "images/" + fileName);
+        const url = await getDownloadURL(fileRef);
+        imageUrls.push(url);
+      }
+
+      // Add image URLs to the formData object
+      formData.images = imageUrls;
+
+      if (!imageUrls) {
+        toast.error("No image urls");
+        return;
+      }
+
+      const formDataCopy = {
+        ...formData,
+        timestamp: serverTimestamp(),
+      };
+
+      // Update listing
+      const docRef = doc(db, "listings", params.listingId);
+      await updateDoc(docRef, formDataCopy);
+      setLoading(false);
+      toast.success("Listing updated!");
+      navigate(`/category/${listing.type}/${docRef.id}`);
+      // Reset the form and state
+      e.target.reset();
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   };
 
@@ -368,7 +423,7 @@ function EditListing() {
             type="submit"
             className=" flex justify-center items-center mt-[5rem] bg-[#00cc66] text-white rounded-2xl py-[0.85rem] px-[2rem] w-[80%] text-sm createListingButton"
           >
-            Create Listing
+            Update listing
           </button>
         </form>
       </main>
