@@ -8,8 +8,10 @@ function Navbar() {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed left-0 bottom-0 right-0 h-[80px] flex items-center z-50 bg-white font-[system-ui]">
-      <nav className="w-full mt-[0.75rem] overflow-y-hidden">
+    <div
+      className={`fixed left-0 bottom-0 right-0 h-[40px] sm:h-[80px] flex items-center bg-white font-[system-ui]`}
+    >
+      <nav className="w-full mt-[0.75rem] overflow-y-hidden text-sm sm:text-lg">
         <ul className="flex items-center justify-around lg:justify-evenly">
           <li
             className="flex flex-col items-center cursor-pointer text-[#8f8f8f]"
