@@ -104,9 +104,9 @@ function Profile() {
   if (loading) return <Spinner />;
 
   return (
-    <div className="font-[system-ui] p-[1rem] sm:p-[2rem]">
+    <div className="font-[system-ui] p-[1rem] sm:p-[2rem] ">
       <header className="flex justify-between items-center">
-        <p className="text-3xl lg:text-5xl font-bold">My Profile</p>
+        <p className="sm:text-3xl lg:text-5xl font-bold">My Profile</p>
         <button
           type="button"
           className="cursor-pointer bg-[#00cc66] py-[0.25rem] px-[0.75rem] text-white font-[500] rounded-lg"
@@ -117,7 +117,7 @@ function Profile() {
       </header>
 
       <main>
-        <div className="mt-8 flex justify-between max-w-[500px]">
+        <div className="mt-4 sm:mt-8 flex justify-between max-w-[500px]">
           <p className="font-[600]">Personal Details</p>
           <p
             className="font-[600] text-[#00cc66] cursor-pointer"
@@ -131,7 +131,7 @@ function Profile() {
           </p>
         </div>
 
-        <div className="max-w-[500px] p-4 bg-white mt-4">
+        <div className="max-w-[500px] p-4 bg-white mt-2 sm:mt-4">
           <form>
             <input
               type="text"
@@ -160,7 +160,7 @@ function Profile() {
 
         <Link
           to="/create-listing"
-          className="flex items-center justify-between max-w-[500px] mt-[2rem] py-4 px-4 font-[600] rounded-2xl bg-white"
+          className="flex items-center justify-between max-w-[500px] mt-1rem sm:mt-[2rem] py-4 px-4 font-[600] rounded-2xl bg-white"
         >
           <img src={homeIcon} alt="home" />
           <p>Sell or rent your home</p>
@@ -169,7 +169,9 @@ function Profile() {
 
         {!loading && listings.length > 0 ? (
           <>
-            <p className="listingText mt-12 font-semibold">Your Listings</p>
+            <p className="listingText mt-6 sm:mt-12 font-semibold">
+              Your Listings
+            </p>
             <ul className="listingsList p-0">
               {listings.map((listing) => (
                 <ListingItem
