@@ -8,23 +8,23 @@ import bathtubIcon from "../assets/svg/bathtubIcon.svg";
 
 function ListingItem({ listing, id, onEdit, onDelete }) {
   return (
-    <li className="categoryListing flex justify-between items-center mb-[1rem] relative">
+    <li className="categoryListing flex flex-col sm:flex-row justify-between items-center mb-[1rem] relative">
       <Link to={`/category/${listing.type}/${id}`} className="contents">
         <img
           src={listing.images[0]}
           alt={listing.name}
-          className="lg:w-[19%] lg:h-[217px] w-[30%] h-[100px] object-cover rounded-3xl"
+          className="lg:w-[19%] lg:h-[217px] w-full h-[200px] object-cover rounded-3xl"
         />
-        <div className="w-full lg:w-[79%] lg:mt-[1rem]">
+        <div className="w-full lg:w-[79%] lg:mt-[1rem] sm:pl-4">
           <p className="font-[600] opacity-[50] text-[0.7rem]">
             {listing.address}
           </p>
           <p className="font-bold lg:text-2xl">{listing.name}</p>
-          <p className="flex items-center font-bold lg:text-3xl my-[0.5rem] text-[#00cc66]">
+          <p className="flex items-center font-bold lg:text-3xl lg:my-[0.5rem] text-[#00cc66]">
             Ghs 1505.00
           </p>
 
-          <div className="flex justify-between max-w-[275px]">
+          <div className="flex justify-between max-w-xs">
             <img src={bedIcon} alt="bed" />
             <p className="font-light text-sm">
               {listing.bedrooms > 1
@@ -44,7 +44,7 @@ function ListingItem({ listing, id, onEdit, onDelete }) {
       <div className="flex">
         {onDelete && (
           <DeleteIcon
-            className="removeIcon text-[2px]"
+            className="removeIcon text-sm"
             fill="rgb(231, 76,60)"
             onClick={() => onDelete(listing.id, listing.name)}
           />
