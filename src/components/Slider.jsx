@@ -1,28 +1,80 @@
-// import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
+import { db } from "../firebase-config";
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
+import Spinner from "./Spinner";
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 function Slider() {
+  const [loading, setLoading] = useState(true);
+  const [listings, setListings] = useState(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      const listingsRef = collection(db, "listings");
+      const q = query(listingsRef, orderBy("timestamp", "desc"), limit(5));
+      const querySnap = await getDocs(q);
+
+      let listings = [];
+
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setListings(listings);
+      setLoading(false);
+    };
+
+    fetchListings();
+  }, []);
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (listings.length === 0) {
+    return <></>;
+  }
+
   return (
-    <>
-      <p className="font-[500] mt-[1rem]">Recommended</p>
+    listings && (
+      <>
+        <p className="exploreHeading font-bold">Recommended</p>
 
-      <div className="relative rounded-3xl w-full h-[50vh] after:content-[''] after:absolute after:bg-[#000] after:top-0 after:left-0 after:h-[50vh] after:w-full after:opacity-50 after:rounded-3xl bg-center bg-cover bg-no-repeat bg-[url('./images/sellCategoryImage.jpg')]">
-        {/* <div className="Banner_contents">
-        <div className="Banner_title">
-          <h1>Hello</h1>
-        </div>
-
-        <div className="Banner_buttons">
-          <button className="Banner_button">Play</button>
-          <button className="Banner_button">My List</button>
-        </div>
-
-        <div className="Banner_description">
-          <p>Hey there!</p>
-        </div>
-      </div>
-      <div className="Banner-fadeBottom"></div> */}
-      </div>
-    </>
+        <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+          {listings.map(({ data, id }) => (
+            <SwiperSlide
+              key={id}
+              onClick={() => navigate(`/category/${data.type}/${id}`)}
+            >
+              <div
+                style={{
+                  background: `url(${data.images[0]}) center no-repeat`,
+                  backgroundSize: "cover",
+                }}
+                className="swiperSlideDiv w-full h-[23vw] min-h-[255px] relative"
+              >
+                <p className="swiperSlideText absolute max-w-[90%] left-0 top-20 text-sm p-2 rounded-2xl text-white bg-black">
+                  {data.name}
+                </p>
+                <p className="swiperSlidePrice absolute max-w-[90%] py-1 px-2 top-36 left-3 rounded-2xl bg-white text-black">
+                  ${data.discountedPrice ?? data.regularPrice}{" "}
+                  {data.type === "rent" && "/ month"}
+                </p>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </>
+    )
   );
 }
 
