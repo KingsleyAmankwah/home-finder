@@ -372,9 +372,7 @@ function CreateListing() {
             />
 
             {type === "rent" && (
-              <p className="formPriceText font-[600] ml-[-1.5rem]">
-                &#8373; / Month
-              </p>
+              <p className="formPriceText font-[600] ml-[-1.5rem]">$ / Month</p>
             )}
           </div>
 
