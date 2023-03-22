@@ -6,9 +6,11 @@ import { db } from "../firebase-config";
 import Spinner from "../components/Spinner";
 import { Helmet } from "react-helmet";
 // import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-// import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import shareIcon from "../assets/svg/shareIcon.svg";
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 function Listing() {
   const [listing, setListing] = useState(null);
@@ -43,17 +45,18 @@ function Listing() {
       </Helmet>
 
       <Swiper slidesPerView={1} pagination={{ clickable: true }}>
-        {listing.imageUrls.map((url, index) => (
-          <SwiperSlide key={index}>
-            <div
-              style={{
-                background: `url(${listing.imageUrls[index]}) center no-repeat`,
-                backgroundSize: "cover",
-              }}
-              className="swiperSlideDiv w-full h-full relative"
-            ></div>
-          </SwiperSlide>
-        ))}
+        {listing &&
+          listing.images.map((url, index) => (
+            <SwiperSlide key={index}>
+              <div
+                style={{
+                  background: `url(${listing.images[index]}) center no-repeat`,
+                  backgroundSize: "cover",
+                }}
+                className={`w-full h-[50vw] lg:h-[25vw] relative  bg-cover bg-center`}
+              ></div>
+            </SwiperSlide>
+          ))}
       </Swiper>
 
       <div
@@ -82,12 +85,12 @@ function Listing() {
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         </p>
-        <p className="listingLocation font-semibold mt-0">{listing.location}</p>
-        <p className="listingType py-[0.25rem] px-2 rounded-[2rem] font-semibold mr-4 bg-black text-white inline">
+        <p className="listingLocation font-semibold my-1">{listing.address}</p>
+        <p className="listingType py-[0.25rem] px-4 rounded-[2rem] font-semibold mr-4 bg-black text-white inline">
           For {listing.type === "rent" ? "Rent" : "Sale"}
         </p>
         {listing.offer && (
-          <p className="discountPrice bg-black text-white rounded-2xl text-sm font-semibold inline">
+          <p className="discountPrice bg-black text-white rounded-2xl py-[0.25rem] px-4  text-sm font-semibold inline">
             ${listing.regularPrice - listing.discountedPrice} discount
           </p>
         )}
@@ -107,9 +110,9 @@ function Listing() {
           <li>{listing.furnished && "Furnished"}</li>
         </ul>
 
-        <p className="listingLocationTitle mt-8 font-semibold text-sm">
-          Location
-        </p>
+        {/* <p className="listingLocationTitle mt-8 font-semibold text-sm">
+          {listing.address}
+        </p> */}
       </div>
     </main>
   );
