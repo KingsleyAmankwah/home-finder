@@ -54,8 +54,6 @@ function App() {
                 <Route path="/create-listing" element={<CreateListing />} />
               </Route>
 
-              <Route path="/contact" element={<Contact />} />
-
               <Route path="/category/:categoryName" element={<Category />} />
               <Route
                 path="/edit-listing/:listingId"
@@ -65,6 +63,7 @@ function App() {
                 path="/category/:categoryName/:listingId"
                 element={<Listing />}
               />
+              <Route path="/contact/:landlordId" element={<Contact />} />
             </Routes>
             <Navbar />
           </Router>
