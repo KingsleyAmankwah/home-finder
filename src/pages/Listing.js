@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
-// import { getAuth } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { db } from "../firebase-config";
 import Spinner from "../components/Spinner";
 import { Helmet } from "react-helmet";
@@ -19,7 +19,7 @@ function Listing() {
 
   const navigate = useNavigate();
   const params = useParams();
-  // const auth = getAuth();
+  const auth = getAuth();
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -113,6 +113,15 @@ function Listing() {
         {/* <p className="listingLocationTitle mt-8 font-semibold text-sm">
           {listing.address}
         </p> */}
+
+        {auth.currentUser?.uid !== listing.userRef && (
+          <Link
+            to={`/contact/${listing.userRef}?listingName=${listing.name}`}
+            className="flex items-center justify-center text-white bg-[#00cc66] text-base font-semibold rounded-2xl my-0 mx-auto py-3 px-8"
+          >
+            Contact Landlord
+          </Link>
+        )}
       </div>
     </main>
   );
