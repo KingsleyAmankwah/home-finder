@@ -6,7 +6,7 @@ function Contact() {
   const onChange = (e) => setMessage(e.target.value);
 
   return (
-    <div className="pageContainer font-[system-ui] p-[1rem] sm:p-[2rem]  mb-[10rem">
+    <div className="pageContainer font-[system-ui] p-[1rem] sm:p-[2rem] mb-[10rem">
       <header>
         <p className="pageHeader text-3xl lg:text-5xl font-bold">
           Contact Landlord
