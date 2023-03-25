@@ -1,6 +1,7 @@
 import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -8,6 +9,7 @@ import {
 } from "firebase/auth";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+import { db } from "../firebase-config";
 
 function Register() {
   const navigate = useNavigate();
@@ -40,13 +42,19 @@ function Register() {
       return;
     }
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
 
         updateProfile(auth.currentUser, {
           displayName: name,
         });
+        const formDataCopy = { ...formData };
+        delete formDataCopy.password;
+        delete formDataCopy.password2;
+        formDataCopy.timestamp = serverTimestamp();
+
+        await setDoc(doc(db, "users", user.uid), formDataCopy);
 
         setLoading(false);
         toast.success(`${user.email} registered succesfully!`);
