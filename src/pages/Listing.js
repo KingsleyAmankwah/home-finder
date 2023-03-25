@@ -95,7 +95,7 @@ function Listing() {
           </p>
         )}
 
-        <ul className="listingDetailsList p-0 list-none">
+        <ul className="listingDetailsList p-0 list-none mb-4">
           <li className="my-[0.3rem] mx-0 font-medium opacity-80">
             {listing.bedrooms > 1
               ? `${listing.bedrooms} Bedrooms`
