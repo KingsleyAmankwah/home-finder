@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
@@ -13,20 +14,34 @@ function Contact() {
 
   const onChange = (e) => setMessage(e.target.value);
 
+  const auth = getAuth();
+
   useEffect(() => {
     const getLandlord = async () => {
-      const docRef = doc(db, 'users', params.landlordId)
-      const docSnap = await getDoc(docRef)
+      const docRef = doc(db, "users", params.landlordId);
+      const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setLandlord(docSnap.data())
+        setLandlord(docSnap.data());
       } else {
-        toast.error('Could not get landlord data')
+        toast.error("Could not get landlord data");
       }
-    }
+    };
 
-    getLandlord()
-  }, [params.landlordId])
+    getLandlord();
+  }, [params.landlordId]);
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+
+    const userEmail = auth.currentUser.email;
+
+    const mailtoLink = `mailto:${landlord?.email}?subject=${searchParams.get(
+      "listingName"
+    )}&body=From: ${userEmail}%0D%0A${message}`;
+
+    window.location.href = mailtoLink;
+  };
 
   return (
     <div className="pageContainer font-[system-ui] p-[1rem] sm:p-[2rem] mb-[10rem">
@@ -42,7 +57,7 @@ function Contact() {
           </p>
         </div>
 
-        <form className="messageForm mt-2">
+        <form className="messageForm mt-2" onSubmit={handleSendMessage}>
           <div className="messageDiv mt-8 flex flex-col mb-16">
             <label htmlFor="message" className="messageLabel mb-2">
               Message
@@ -57,18 +72,12 @@ function Contact() {
             ></textarea>
           </div>
 
-          <a
-            href={`mailto:${landlord.email}?Subject=${searchParams.get(
-              "listingName"
-            )}&body=${message}`}
+          <button
+            type="submit"
+            className=" flex justify-center items-center mt-[5rem] bg-[#00cc66] text-white rounded-2xl py-[0.85rem] px-[2rem] w-[80%] text-sm createListingButton"
           >
-            <button
-              type="submit"
-              className=" flex justify-center items-center mt-[5rem] bg-[#00cc66] text-white rounded-2xl py-[0.85rem] px-[2rem] w-[80%] text-sm createListingButton"
-            >
-              Send Message
-            </button>
-          </a>
+            Send Message
+          </button>
         </form>
       </main>
     </div>
