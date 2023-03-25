@@ -1,7 +1,7 @@
 <div align="center" id="top"> 
   <img src="./.github/app.gif" alt="Home Finder" />
 
-  &#xa0;
+&#xa0;
 
   <!-- <a href="https://homefinder.netlify.app">Demo</a> -->
 </div>
@@ -26,9 +26,9 @@
 
 <!-- Status -->
 
-<!-- <h4 align="center"> 
+<!-- <h4 align="center">
 	🚧  Home Finder 🚀 Under construction...  🚧
-</h4> 
+</h4>
 
 <hr> -->
 
@@ -44,31 +44,35 @@
 
 <br>
 
-## :dart: About ##
+## :dart: About
 
-Describe your project
+Home Finder is an innovative online platform that makes it easy to buy, sell, and rent homes. Our mission is to help people find their dream homes quickly and easily, while also providing an exceptional user experience.
 
-## :sparkles: Features ##
+## :sparkles: Features
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
 
-## :rocket: Technologies ##
+:heavy_check_mark: User authentication and authorization using Firebase Authentication;\
+:heavy_check_mark: Real-time database with Firebase Realtime Database or Firestore;\
+:heavy_check_mark: Ability to create, edit, and delete listings;\
+:heavy_check_mark: Contact form to connect buyers and sellers/renters and landlords;\
+:heavy_check_mark: Social sharing options to share listings on social media platforms;
+
+## :rocket: Technologies
 
 The following tools were used in this project:
 
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
 - [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://pt-br.reactjs.org/)
+- [Firebase](https://pt-br.reactjs.org/)
+- [Firebase Authentication](https://pt-br.reactjs.org/)
+- [Firebase Realtime Database](https://pt-br.reactjs.org/)
 
-## :white_check_mark: Requirements ##
+
+## :white_check_mark: Requirements
 
 Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
 
-## :checkered_flag: Starting ##
+## :checkered_flag: Starting
 
 ```bash
 # Clone this project
@@ -78,18 +82,17 @@ $ git clone https://github.com/KingsleyAmankwah/home-finder
 $ cd home-finder
 
 # Install dependencies
-$ yarn
+$ npm install
 
 # Run the project
-$ yarn start
+$ npm run start
 
 # The server will initialize in the <http://localhost:3000>
 ```
 
-## :memo: License ##
+## :memo: License
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
-
 
 Made with :heart: by <a href="https://github.com/KingsleyAmankwah" target="_blank">Kingsley✨</a>
 
