@@ -104,7 +104,7 @@ function Profile() {
   if (loading) return <Spinner />;
 
   return (
-    <div className="font-[system-ui] p-[1rem] sm:p-[2rem] ">
+    <div className="font-[system-ui] p-[1rem] sm:p-[2rem] m-4 lg:m-12 mb-[10rem]">
       <header className="flex justify-between items-center">
         <p className="sm:text-3xl lg:text-5xl font-bold">My Profile</p>
         <button
