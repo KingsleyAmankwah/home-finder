@@ -74,8 +74,8 @@ function Listing() {
 
       {shareLinkCopied && <p className="linkCopied">Link Copied!</p>}
 
-      <div className="listingDetails mb-40">
-        <p className="listingName font-semibold text-base mb-2">
+      <div className="listingDetails m-4 lg:m-12 mb-40">
+        <p className="listingName font-bold text-base mb-2">
           {listing.name} - $
           {listing.offer
             ? listing.discountedPrice
@@ -86,7 +86,7 @@ function Listing() {
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         </p>
         <p className="listingLocation font-semibold my-1">{listing.address}</p>
-        <p className="listingType py-[0.25rem] px-4 rounded-[2rem] font-semibold mr-4 bg-black text-white inline">
+        <p className="listingType py-[0.25rem] px-4 rounded-[2rem] font-semibold mr-4 bg-[#00cc66] text-white inline">
           For {listing.type === "rent" ? "Rent" : "Sale"}
         </p>
         {listing.offer && (
