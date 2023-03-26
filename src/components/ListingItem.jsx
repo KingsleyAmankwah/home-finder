@@ -21,7 +21,9 @@ function ListingItem({ listing, id, onEdit, onDelete }) {
           </p>
           <p className="font-bold lg:text-2xl">{listing.name}</p>
           <p className="flex items-center font-bold lg:text-3xl lg:my-[0.5rem] text-[#00cc66]">
-            Ghs 1505.00
+            {listing.regularPrice
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </p>
 
           <div className="flex justify-between max-w-xs">
