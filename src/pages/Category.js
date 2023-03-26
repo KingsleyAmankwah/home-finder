@@ -102,7 +102,7 @@ function Category() {
   if (loading) return <Spinner />;
 
   return (
-    <div className="font-[system-ui] p-[1rem] sm:p-[2rem]">
+    <div className="font-[system-ui] p-[1rem] sm:p-[2rem] mb-[10rem]">
       <header>
         <p className="text-3xl lg:text-5xl font-bold">
           {params.categoryName === "rent"
