@@ -104,7 +104,7 @@ function Profile() {
   if (loading) return <Spinner />;
 
   return (
-    <div className="font-[system-ui] p-[1rem] sm:p-[2rem] m-4 lg:m-12 mb-[10rem]">
+    <div className="font-[system-ui] p-[1rem] sm:p-[2rem]  mb-[10rem]">
       <header className="flex justify-between items-center">
         <p className="sm:text-3xl lg:text-5xl font-bold">My Profile</p>
         <button
@@ -150,7 +150,6 @@ function Profile() {
               id="email"
               name="email"
               value={email}
-              // onChange={onChange}
               disabled
               placeholder="Email"
               className={`font-[600] h-[3rem] w-full border-0 outline-0`}
@@ -169,9 +168,7 @@ function Profile() {
 
         {!loading && listings.length > 0 ? (
           <>
-            <p className="listingText mt-6 sm:mt-12 font-semibold">
-              Your Listings
-            </p>
+            <p className="listingText my-6 font-semibold">Your Listings</p>
             <ul className="listingsList p-0">
               {listings.map((listing) => (
                 <ListingItem
