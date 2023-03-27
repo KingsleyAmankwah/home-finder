@@ -114,7 +114,7 @@ function Offers() {
 
           <p
             onClick={onLoadMore}
-            className="opacity-75 py-[0.25rem] px-[0.5] cursor-pointer w-[8rem] my-0 mx-auto text-center rounded-2xl bg-[#000] text-white font-bold"
+            className="opacity-75 hidden py-[0.25rem] px-[0.5] cursor-pointer w-[8rem] my-0 mx-auto text-center rounded-2xl bg-[#000] text-white font-bold"
           >
             Load More
           </p>
