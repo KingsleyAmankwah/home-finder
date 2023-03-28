@@ -1,4 +1,4 @@
-import emoji from "../images/emoji.png";
+// import emoji from "../images/emoji.png";
 
 const NoInternet = () => {
   return (
